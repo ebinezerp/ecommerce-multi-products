@@ -41,8 +41,8 @@
 						role="button" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false"> Attributes </a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="#">Add Attribute</a> <a
-								class="dropdown-item" href="#">All Attributes</a>
+							<a class="dropdown-item" href="addattribute">Add Attribute</a> <a
+								class="dropdown-item" href="allattributes">All Attributes</a>
 							<div class="dropdown-divider"></div>
 						</div></li>
 				</ul>

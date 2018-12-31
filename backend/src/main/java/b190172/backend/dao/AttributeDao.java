@@ -10,7 +10,6 @@ public interface AttributeDao {
 	public boolean updateAttribute(Attribute attribute);
 	public boolean deleteAttribute(Attribute attribute);
 	public Attribute get(long attributeId);
-	public List<Attribute> getAttributes(int categoryId);
 	public List<Attribute> getAttributes();
 
 }

@@ -115,7 +115,26 @@ public class AttributeTestCase {
 	
 	
 	@Test
+	public void testUpdateAttribute_WithChange_InAttributeValues() {
+		attributeDao.addAttribute(attribute);
+		Attribute fetechedAttribute=attributeDao.get(attribute.getAttributeId());
+		fetechedAttribute.setAttributeName("New Attribute Name");
+		assertTrue(attributeDao.updateAttribute(fetechedAttribute));
+	}
+	
+	@Test
 	public void testUpdateAttribute() {
+		attributeDao.addAttribute(attribute);
+		Attribute fetechedAttribute=attributeDao.get(attribute.getAttributeId());
+		SubCategory subCategory=new SubCategory();
+		subCategory.setCategory(category);
+		subCategory.setSubCategoryName("Tablet");
+		subCategory.setSubCategoryDescription("This is Tablet section");
+		subCategoryDao.addSubCategory(subCategory);
+		subCategories=fetechedAttribute.getSubCategories();
+		subCategories.add(subCategory);
+		assertTrue(attributeDao.updateAttribute(fetechedAttribute));
+		subCategoryDao.deleteSubCategory(subCategory);
 		
 	}
 	

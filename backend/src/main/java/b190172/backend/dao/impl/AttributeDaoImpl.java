@@ -49,7 +49,7 @@ public class AttributeDaoImpl implements AttributeDao {
 		try {
 			if (attribute.getSubCategories() != null && attribute.getSubCategories().size() > 0) {
 				if (isAllSubCategoriesExisted(attribute.getSubCategories())) {
-					sessionFactory.getCurrentSession().update(attribute);
+					sessionFactory.getCurrentSession().merge(attribute);
 					return true;
 				} else {
 					return false;
@@ -87,16 +87,17 @@ public class AttributeDaoImpl implements AttributeDao {
 		}
 	}
 
-	@Override
-	public List<Attribute> getAttributes(int categoryId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public List<Attribute> getAttributes() {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return sessionFactory.getCurrentSession().createQuery("From Attribute",Attribute.class)
+			.getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	private boolean isAllSubCategoriesExisted(List<SubCategory> subCategories) {

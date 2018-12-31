@@ -11,7 +11,7 @@
 
 	<context:component-scan
 		base-package="b190172"></context:component-scan>
-	<mvc:annotation-driven></mvc:annotation-driven>
+	<mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
 
 	<mvc:resources location="/resources/"
 		mapping="/resources/**"></mvc:resources>
@@ -23,5 +23,15 @@
 		<property name="suffix" value=".jsp"></property>
 
 	</bean>
+	
+	<bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean" >
+    <property name="converters">
+        <set>
+            <bean class="b190172.adminfrontend.util.StringToSubCategoryListConverter"/>
+            <bean class="b190172.adminfrontend.util.StringToAttributeListConverter"></bean>
+        </set>
+    </property>
+</bean>
+	
 
 </beans>

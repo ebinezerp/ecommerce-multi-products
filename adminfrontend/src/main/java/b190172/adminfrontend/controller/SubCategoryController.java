@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import b190172.backend.dao.AttributeDao;
 import b190172.backend.dao.CategoryDao;
 import b190172.backend.dao.SubCategoryDao;
 import b190172.backend.model.SubCategory;
@@ -20,10 +21,14 @@ public class SubCategoryController {
 	@Autowired
 	private CategoryDao categoryDao;
 	
+	@Autowired
+	private AttributeDao attributeDao;
+	
 	@GetMapping("/addsubcategory")
 	public String addSubCategoryPage(Model model) {	
 		model.addAttribute("categories", categoryDao.getCategories());
 		model.addAttribute("subcategory", new SubCategory());
+		model.addAttribute("attributes", attributeDao.getAttributes());
 		return "addsubcategory";
 	}
 	

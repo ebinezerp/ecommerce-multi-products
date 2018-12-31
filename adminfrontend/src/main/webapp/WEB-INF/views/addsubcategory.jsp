@@ -29,7 +29,13 @@
 			<springform:input path="subCategoryDescription" class="form-control" />
 		</div>
 		<div class="form-group">
-			<springform:button value="submit">Add Category</springform:button>
+			<label for="attributes">Attributes</label>
+			<springform:select path="attributes" class="form-control">
+				<springform:options items="${attributes}" itemLabel="attributeName" itemValue="attributeId"/>
+			</springform:select>
+		</div>
+		<div class="form-group">
+			<springform:button value="submit">Add SubCategory</springform:button>
 		</div>
 	</springform:form> </section>
 
