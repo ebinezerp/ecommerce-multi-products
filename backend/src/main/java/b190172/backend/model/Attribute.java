@@ -2,6 +2,7 @@ package b190172.backend.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,6 +16,8 @@ public class Attribute {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long attributeId;
+	
+	@Column(nullable = false, unique = true)
 	private String attributeName;
 
 	@ManyToMany(fetch = FetchType.EAGER)

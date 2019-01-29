@@ -18,9 +18,7 @@
 		</div>
 		<div class="form-group">
 			<label for="subCategories">Sub Categories</label>
-			<springform:select path="subCategories" class="form-control">
-				<springform:options items="${subCategories}" itemLabel="subCategoryName" itemValue="subCategoryId"/>
-			</springform:select>
+			<springform:select path="subCategories" items="${subCategories}" itemLabel="subCategoryName" itemValue="subCategoryId" multiple="true"></springform:select>
 		</div>
 		<div class="form-group">
 			<springform:button value="submit" class="form-control btn btn-primary">Submit</springform:button>

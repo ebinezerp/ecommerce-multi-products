@@ -2,16 +2,19 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:webflow-config="http://www.springframework.org/schema/webflow-config"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/mvc
-		http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/webflow-config
+		http://www.springframework.org/schema/webflow-config/spring-webflow-config.xsd">
 
-	<context:component-scan
-		base-package="b190172"></context:component-scan>
-	<mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
+	<context:component-scan base-package="b190172"></context:component-scan>
+	<mvc:annotation-driven
+		conversion-service="conversionService"></mvc:annotation-driven>
 
 	<mvc:resources location="/resources/"
 		mapping="/resources/**"></mvc:resources>
@@ -23,15 +26,44 @@
 		<property name="suffix" value=".jsp"></property>
 
 	</bean>
-	
-	<bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean" >
-    <property name="converters">
-        <set>
-            <bean class="b190172.adminfrontend.util.StringToSubCategoryListConverter"/>
-            <bean class="b190172.adminfrontend.util.StringToAttributeListConverter"></bean>
-        </set>
-    </property>
-</bean>
-	
+
+	<bean id="conversionService"
+		class="org.springframework.context.support.ConversionServiceFactoryBean">
+		<property name="converters">
+			<set>
+				<bean
+					class="b190172.adminfrontend.util.StringArrayToSubCategoryListConverter" />
+				<bean
+					class="b190172.adminfrontend.util.StringArrayToAttributeListConverter" />
+				<bean
+					class="b190172.adminfrontend.util.StringToSubCategoryListConverter" />
+				<bean
+					class="b190172.adminfrontend.util.StringToAttributeListConverter" />
+			</set>
+		</property>
+	</bean>
+
+	<webflow-config:flow-registry
+		id="flowRegistry">
+		<webflow-config:flow-location
+			id="addproduct" path="/WEB-INF/addproduct-flow.xml"></webflow-config:flow-location>
+	</webflow-config:flow-registry>
+	<webflow-config:flow-executor
+		id="flowExecutor" flow-registry="flowRegistry"></webflow-config:flow-executor>
+
+
+
+	<bean
+		class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
+		<property name="flowExecutor" ref="flowExecutor" />
+	</bean>
+
+	<bean
+		class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
+		<property name="flowRegistry" ref="flowRegistry" />
+		<property name="order" value="0" />
+	</bean>
+
+
 
 </beans>

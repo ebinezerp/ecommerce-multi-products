@@ -9,17 +9,18 @@ import org.springframework.stereotype.Service;
 
 import b190172.backend.dao.AttributeDao;
 import b190172.backend.model.Attribute;
-
 @Service
-public class StringToAttributeListConverter implements Converter<String, List<Attribute>> {
-
+public class StringArrayToAttributeListConverter implements Converter<String[], List<Attribute>> {
+	
 	@Autowired
 	private AttributeDao attributeDao;
 
 	@Override
-	public List<Attribute> convert(String attributeId) {
-		List<Attribute> attributes = new ArrayList<Attribute>();
-		attributes.add(attributeDao.get(Long.parseLong(attributeId)));
+	public List<Attribute> convert(String[] attributeIds) {
+		List<Attribute> attributes=new ArrayList<Attribute>();
+		for(String attributeId:attributeIds) {
+			attributes.add(attributeDao.get(Long.parseLong(attributeId)));
+		}
 		return attributes;
 	}
 
